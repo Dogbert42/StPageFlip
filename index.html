@@ -7,66 +7,83 @@
     <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@400;600&display=swap" rel="stylesheet">
     
     <style>
-        body, html { margin: 0; padding: 0; height: 100%; width: 100%; background-color: #1a1a1a; font-family: 'Crimson Pro', serif; display: flex; justify-content: center; align-items: center; overflow: hidden; }
-        
-        /* The Book Container */
-        #book-viewport { width: 100vw; height: 100vh; display: flex; justify-content: center; align-items: center; }
-
-        /* Page Styling */
-        .page { padding: 50px; background-color: #fdfaf3; border: 1px solid #dcdcdc; box-sizing: border-box; }
-        
-        /* This makes the text look like it's on a real page */
-        .page-content { 
-            height: 100%; 
-            outline: none; /* Removes the blue box when clicking to type */
-            font-size: 1.2rem;
-            line-height: 1.6;
-            color: #333;
-            overflow-wrap: break-word;
+        /* Prevents the whole screen from moving */
+        body, html { 
+            margin: 0; padding: 0; height: 100%; width: 100%; 
+            background-color: #1a1a1a; font-family: 'Crimson Pro', serif; 
+            display: flex; justify-content: center; align-items: center; 
+            overflow: hidden; 
         }
 
-        h1 { font-size: 2.5rem; margin-top: 50px; text-align: center; }
-        .author-name { text-align: center; font-style: italic; margin-top: 20px; }
+        /* The container that holds the book and keeps it centered */
+        #book-container {
+            width: 90vw;  /* Uses 90% of screen width */
+            height: 85vh; /* Uses 85% of screen height */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
 
-        /* Hard Cover Styling */
-        .page.hard { background-color: #4a0e0e; color: #e0c097; border: 2px solid #360a0a; }
-        .page.hard .page-content { color: #e0c097; }
+        /* Individual Page Styling */
+        .page { 
+            padding: 30px; 
+            background-color: #fdfaf3; 
+            border: 1px solid #dcdcdc; 
+            box-sizing: border-box; 
+            display: flex;
+            flex-direction: column;
+        }
+        
+        /* The scrollable text area */
+        .page-content { 
+            flex-grow: 1;
+            outline: none; 
+            font-size: 1.1rem;
+            line-height: 1.5;
+            color: #333;
+            overflow-y: auto; /* Allows scrolling if text is too long */
+            padding-right: 10px; /* Space for the scrollbar */
+        }
 
-        /* Page Numbering */
-        .page-footer { position: absolute; bottom: 20px; width: 100%; text-align: center; font-size: 0.8rem; color: #999; left: 0; }
+        /* Custom Scrollbar for a cleaner look */
+        .page-content::-webkit-scrollbar { width: 5px; }
+        .page-content::-webkit-scrollbar-thumb { background: #dcdcdc; border-radius: 10px; }
+
+        h1 { font-size: 2rem; text-align: center; margin-top: 20%; }
+        .page.hard { background-color: #4a0e0e; color: #e0c097; }
+        .page.hard .page-content { color: #e0c097; overflow: hidden; }
     </style>
 </head>
 <body>
 
-<div id="book-viewport">
+<div id="book-container">
     <div id="book">
         
         <div class="page hard" data-density="hard">
             <div class="page-content">
-                <h1>BOOK TITLE</h1>
-                <p class="author-name">by Joshua Isbell</p>
+                <h1>THE JOKE BOOK</h1>
+                <p style="text-align: center;">Joshua Isbell</p>
             </div>
         </div>
 
         <div class="page">
             <div class="page-content" contenteditable="true">
-                <h2>Chapter 1</h2>
-                <p>Click here to start typing your text. This area is "contenteditable," meaning you can test your layout right in the browser!</p>
+                <h2>Page 1</h2>
+                <p>Click here to type. If you type a lot of text, this specific area will scroll so the book doesn't grow too large for your screen.</p>
+                <p>Try it out!</p>
             </div>
-            <div class="page-footer">1</div>
         </div>
 
         <div class="page">
             <div class="page-content" contenteditable="true">
-                <p>Add your jokes, stories, or manuscript text here.</p>
-                <p>To add more pages, just copy the "page" div in the code and paste it below this one.</p>
+                <h2>Page 2</h2>
+                <p>Add more content here...</p>
             </div>
-            <div class="page-footer">2</div>
         </div>
 
         <div class="page hard" data-density="hard">
             <div class="page-content">
-                <p style="text-align: center; margin-top: 200px;">Thanks for reading!</p>
+                <h2 style="text-align: center; margin-top: 40%;">FIN</h2>
             </div>
         </div>
 
@@ -76,13 +93,11 @@
 <script src="https://cdn.jsdelivr.net/npm/page-flip/dist/js/page-flip.browser.js"></script>
 <script>
     const pageFlip = new St.PageFlip(document.getElementById('book'), {
-        width: 450, 
-        height: 600,
-        size: "stretch",
-        minWidth: 315, maxWidth: 1000,
-        minHeight: 420, maxHeight: 1350,
+        width: 400, 
+        height: 550,
+        size: "fixed", // Keeps the book a consistent size
         showCover: true,
-        usePortrait: true, // Set to false if you want it to always show two pages like a spread
+        usePortrait: true, // Shows one page at a time (better for editing)
         mobileScrollSupport: false
     });
 
