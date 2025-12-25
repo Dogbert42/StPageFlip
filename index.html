@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Joshua Isbell - Author Editor</title>
+    <title>Joshua Isbell - 20 Page Book</title>
     <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@400;600&display=swap" rel="stylesheet">
     
     <style>
@@ -14,39 +14,35 @@
             overflow: hidden; 
         }
 
-        #book-container {
-            width: 90vw; height: 80vh;
-            display: flex; justify-content: center; align-items: center;
-        }
+        #book-container { width: 95vw; height: 80vh; display: flex; justify-content: center; align-items: center; }
 
         .page { 
             padding: 40px; background-color: #fdfaf3; border: 1px solid #dcdcdc; 
-            box-sizing: border-box; display: flex; flex-direction: column;
+            box-sizing: border-box; display: flex; flex-direction: column; position: relative;
         }
         
-        /* This is now easily clickable without flipping */
         .page-content { 
-            flex-grow: 1; outline: 2px dashed transparent; 
-            font-size: 1.2rem; line-height: 1.6; color: #333;
-            overflow-y: auto; cursor: text;
+            flex-grow: 1; outline: none; font-size: 1.1rem; line-height: 1.5; color: #333;
+            overflow-y: auto; cursor: text; padding-bottom: 20px;
         }
 
-        /* Highlights the box when you are editing */
-        .page-content:focus { outline: 2px dashed #ccc; background: #fff; }
+        /* Page Number Styling */
+        .page-num {
+            position: absolute; bottom: 15px; width: 100%; left: 0;
+            text-align: center; font-size: 0.8rem; color: #888; pointer-events: none;
+        }
 
         .page.hard { background-color: #4a0e0e; color: #e0c097; }
+        .page.hard .page-content { color: #e0c097; overflow: hidden; }
 
-        /* BUTTON STYLING */
-        .controls { margin-top: 20px; display: flex; gap: 20px; }
+        .controls { margin-top: 20px; display: flex; gap: 15px; z-index: 10; }
         
         button {
-            padding: 12px 25px; font-size: 1rem; cursor: pointer;
-            background-color: #e0c097; border: none; border-radius: 5px;
-            font-weight: bold; color: #4a0e0e; transition: 0.2s;
+            padding: 10px 20px; font-size: 0.9rem; cursor: pointer;
+            background-color: #e0c097; border: none; border-radius: 4px;
+            font-weight: bold; color: #4a0e0e;
         }
-
         button:hover { background-color: #fff; }
-        button:active { transform: translateY(2px); }
     </style>
 </head>
 <body>
@@ -55,47 +51,54 @@
     <div id="book">
         <div class="page hard" data-density="hard">
             <div class="page-content">
-                <h1 style="text-align: center; margin-top: 20%;">BOOK TITLE</h1>
-                <p style="text-align: center;">Joshua Isbell</p>
+                <h1 style="text-align: center; margin-top: 25%;">THE 20-PAGE MANUSCRIPT</h1>
+                <p style="text-align: center;">By Joshua Isbell</p>
             </div>
+            <div class="page-num">Cover</div>
         </div>
 
-        <div class="page">
-            <div class="page-content" contenteditable="true">
-                <h2>Chapter One</h2>
-                <p>Click here! Now you can type your jokes or stories without the page turning. Use the buttons below to navigate.</p>
-            </div>
-        </div>
-
-        <div class="page">
-            <div class="page-content" contenteditable="true">
-                <h2>Chapter Two</h2>
-                <p>Editing is much easier now. You can even paste long blocks of text here.</p>
-            </div>
-        </div>
+        <div class="page"><div class="page-content" contenteditable="true"><h2>Page 2</h2><p>Start typing here...</p></div><div class="page-num">2</div></div>
+        <div class="page"><div class="page-content" contenteditable="true"><h2>Page 3</h2></div><div class="page-num">3</div></div>
+        <div class="page"><div class="page-content" contenteditable="true"><h2>Page 4</h2></div><div class="page-num">4</div></div>
+        <div class="page"><div class="page-content" contenteditable="true"><h2>Page 5</h2></div><div class="page-num">5</div></div>
+        <div class="page"><div class="page-content" contenteditable="true"><h2>Page 6</h2></div><div class="page-num">6</div></div>
+        <div class="page"><div class="page-content" contenteditable="true"><h2>Page 7</h2></div><div class="page-num">7</div></div>
+        <div class="page"><div class="page-content" contenteditable="true"><h2>Page 8</h2></div><div class="page-num">8</div></div>
+        <div class="page"><div class="page-content" contenteditable="true"><h2>Page 9</h2></div><div class="page-num">9</div></div>
+        <div class="page"><div class="page-content" contenteditable="true"><h2>Page 10</h2></div><div class="page-num">10</div></div>
+        <div class="page"><div class="page-content" contenteditable="true"><h2>Page 11</h2></div><div class="page-num">11</div></div>
+        <div class="page"><div class="page-content" contenteditable="true"><h2>Page 12</h2></div><div class="page-num">12</div></div>
+        <div class="page"><div class="page-content" contenteditable="true"><h2>Page 13</h2></div><div class="page-num">13</div></div>
+        <div class="page"><div class="page-content" contenteditable="true"><h2>Page 14</h2></div><div class="page-num">14</div></div>
+        <div class="page"><div class="page-content" contenteditable="true"><h2>Page 15</h2></div><div class="page-num">15</div></div>
+        <div class="page"><div class="page-content" contenteditable="true"><h2>Page 16</h2></div><div class="page-num">16</div></div>
+        <div class="page"><div class="page-content" contenteditable="true"><h2>Page 17</h2></div><div class="page-num">17</div></div>
+        <div class="page"><div class="page-content" contenteditable="true"><h2>Page 18</h2></div><div class="page-num">18</div></div>
+        <div class="page"><div class="page-content" contenteditable="true"><h2>Page 19</h2></div><div class="page-num">19</div></div>
 
         <div class="page hard" data-density="hard">
             <div class="page-content">
                 <h2 style="text-align: center; margin-top: 40%;">THE END</h2>
             </div>
+            <div class="page-num">20</div>
         </div>
     </div>
 </div>
 
 <div class="controls">
-    <button onclick="pageFlip.flipPrev()">PREVIOUS PAGE</button>
-    <button onclick="pageFlip.flipNext()">NEXT PAGE</button>
+    <button onclick="pageFlip.flipPrev()">⬅ PREVIOUS</button>
+    <button onclick="pageFlip.flipNext()">NEXT ➡</button>
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/page-flip/dist/js/page-flip.browser.js"></script>
 <script>
     const pageFlip = new St.PageFlip(document.getElementById('book'), {
-        width: 400, 
-        height: 550,
+        width: 450, 
+        height: 600,
         size: "fixed",
         showCover: true,
-        clickEventForward: false, // THIS IS THE KEY: Disables click-to-flip
-        useMouseEvents: false     // Disables dragging with mouse so it doesn't interfere with highlighting text
+        clickEventForward: false, 
+        useMouseEvents: false     
     });
 
     pageFlip.loadFromHTML(document.querySelectorAll('.page'));
