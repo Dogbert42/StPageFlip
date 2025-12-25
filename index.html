@@ -3,91 +3,88 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Joshua Isbell - Digital Book</title>
+    <title>Joshua Isbell - Author Editor</title>
     <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@400;600&display=swap" rel="stylesheet">
     
     <style>
-        /* Prevents the whole screen from moving */
         body, html { 
             margin: 0; padding: 0; height: 100%; width: 100%; 
             background-color: #1a1a1a; font-family: 'Crimson Pro', serif; 
-            display: flex; justify-content: center; align-items: center; 
+            display: flex; flex-direction: column; justify-content: center; align-items: center; 
             overflow: hidden; 
         }
 
-        /* The container that holds the book and keeps it centered */
         #book-container {
-            width: 90vw;  /* Uses 90% of screen width */
-            height: 85vh; /* Uses 85% of screen height */
-            display: flex;
-            justify-content: center;
-            align-items: center;
+            width: 90vw; height: 80vh;
+            display: flex; justify-content: center; align-items: center;
         }
 
-        /* Individual Page Styling */
         .page { 
-            padding: 30px; 
-            background-color: #fdfaf3; 
-            border: 1px solid #dcdcdc; 
-            box-sizing: border-box; 
-            display: flex;
-            flex-direction: column;
+            padding: 40px; background-color: #fdfaf3; border: 1px solid #dcdcdc; 
+            box-sizing: border-box; display: flex; flex-direction: column;
         }
         
-        /* The scrollable text area */
+        /* This is now easily clickable without flipping */
         .page-content { 
-            flex-grow: 1;
-            outline: none; 
-            font-size: 1.1rem;
-            line-height: 1.5;
-            color: #333;
-            overflow-y: auto; /* Allows scrolling if text is too long */
-            padding-right: 10px; /* Space for the scrollbar */
+            flex-grow: 1; outline: 2px dashed transparent; 
+            font-size: 1.2rem; line-height: 1.6; color: #333;
+            overflow-y: auto; cursor: text;
         }
 
-        /* Custom Scrollbar for a cleaner look */
-        .page-content::-webkit-scrollbar { width: 5px; }
-        .page-content::-webkit-scrollbar-thumb { background: #dcdcdc; border-radius: 10px; }
+        /* Highlights the box when you are editing */
+        .page-content:focus { outline: 2px dashed #ccc; background: #fff; }
 
-        h1 { font-size: 2rem; text-align: center; margin-top: 20%; }
         .page.hard { background-color: #4a0e0e; color: #e0c097; }
-        .page.hard .page-content { color: #e0c097; overflow: hidden; }
+
+        /* BUTTON STYLING */
+        .controls { margin-top: 20px; display: flex; gap: 20px; }
+        
+        button {
+            padding: 12px 25px; font-size: 1rem; cursor: pointer;
+            background-color: #e0c097; border: none; border-radius: 5px;
+            font-weight: bold; color: #4a0e0e; transition: 0.2s;
+        }
+
+        button:hover { background-color: #fff; }
+        button:active { transform: translateY(2px); }
     </style>
 </head>
 <body>
 
 <div id="book-container">
     <div id="book">
-        
         <div class="page hard" data-density="hard">
             <div class="page-content">
-                <h1>THE JOKE BOOK</h1>
+                <h1 style="text-align: center; margin-top: 20%;">BOOK TITLE</h1>
                 <p style="text-align: center;">Joshua Isbell</p>
             </div>
         </div>
 
         <div class="page">
             <div class="page-content" contenteditable="true">
-                <h2>Page 1</h2>
-                <p>Click here to type. If you type a lot of text, this specific area will scroll so the book doesn't grow too large for your screen.</p>
-                <p>Try it out!</p>
+                <h2>Chapter One</h2>
+                <p>Click here! Now you can type your jokes or stories without the page turning. Use the buttons below to navigate.</p>
             </div>
         </div>
 
         <div class="page">
             <div class="page-content" contenteditable="true">
-                <h2>Page 2</h2>
-                <p>Add more content here...</p>
+                <h2>Chapter Two</h2>
+                <p>Editing is much easier now. You can even paste long blocks of text here.</p>
             </div>
         </div>
 
         <div class="page hard" data-density="hard">
             <div class="page-content">
-                <h2 style="text-align: center; margin-top: 40%;">FIN</h2>
+                <h2 style="text-align: center; margin-top: 40%;">THE END</h2>
             </div>
         </div>
-
     </div>
+</div>
+
+<div class="controls">
+    <button onclick="pageFlip.flipPrev()">PREVIOUS PAGE</button>
+    <button onclick="pageFlip.flipNext()">NEXT PAGE</button>
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/page-flip/dist/js/page-flip.browser.js"></script>
@@ -95,10 +92,10 @@
     const pageFlip = new St.PageFlip(document.getElementById('book'), {
         width: 400, 
         height: 550,
-        size: "fixed", // Keeps the book a consistent size
+        size: "fixed",
         showCover: true,
-        usePortrait: true, // Shows one page at a time (better for editing)
-        mobileScrollSupport: false
+        clickEventForward: false, // THIS IS THE KEY: Disables click-to-flip
+        useMouseEvents: false     // Disables dragging with mouse so it doesn't interfere with highlighting text
     });
 
     pageFlip.loadFromHTML(document.querySelectorAll('.page'));
